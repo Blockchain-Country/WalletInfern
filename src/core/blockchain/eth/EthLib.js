@@ -1,8 +1,9 @@
 const Web3 = require("web3");
 const Transaction = require("ethereumjs-tx");
-const secrets = require("../../../../secrets/Secret.js");
 
-let address = "0xd407B30475a7AE279359f1f0172600F4e391f564";
+let address = process.env.ETH_ADDRESS;
+let privateKey = process.env.ETH_PRIVATE_KEY;
+let providerUrl = process.env.ETH_PROVIDER_URL;
 
 let GWEI = 10 ** 9;
 let GAS_PRICE = 70 * GWEI;
@@ -10,7 +11,7 @@ let GAS_LIMIT = 21000;
 
 class EthLib {
   constructor() {
-    this.web3 = new Web3(new Web3.providers.HttpProvider(secrets.PROVIDER_URL));
+    this.web3 = new Web3(new Web3.providers.HttpProvider(providerUrl));
   }
 
   getAddress() {
@@ -26,7 +27,7 @@ class EthLib {
   getPrivateKey() {
     return new Promise(async (resolve, reject) => {
       try {
-        return resolve(secrets.PRIVATE_KEY);
+        return resolve(privateKey);
       } catch (e) {
         return reject(e);
       }
@@ -142,8 +143,8 @@ class EthLib {
   getNextNonce(to, value, data) {
     return new Promise(async (resolve, reject) => {
       try {
-        let address = await this.getAddress();
-        let nonce = await this.web3.eth.getTransactionCount(address);
+        let _address = await this.getAddress();
+        let nonce = await this.web3.eth.getTransactionCount(_address);
         return resolve(nonce);
       } catch (e) {
         return reject(e);
