@@ -5,7 +5,7 @@ class Renderer {
 
   renderUI() {
     this.renderCurrency();
-    this.renderBallance();
+    this.renderBalance();
     this.renderAddress();
     this.renderQrCode();
   }
@@ -15,9 +15,9 @@ class Renderer {
     element.innerHTML = this.app.getCurrency();
   }
 
-  renderBallance() {
-    let element = document.getElementById("ballance_text");
-    this.app.getBallance().then((balance) => {
+  renderBalance() {
+    let element = document.getElementById("balance_text");
+    this.app.getBalance().then((balance) => {
       element.innerHTML = balance;
     });
   }
