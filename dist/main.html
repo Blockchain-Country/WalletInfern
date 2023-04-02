@@ -14,10 +14,13 @@
 <div>
     <div>
         <p>
-            <button class="w3_button" id="eth">ETH</button>
+            <button class="w3_button" id="ETH">ETH</button>
         </p>
         <p>
-            <button class="w3_button" id="eth20">ETH20</button>
+            <button class="w3_button" id="ETH20">ETH20</button>
+        </p>
+        <p>
+            <button class="w3_button" id="BTC">BTC</button>
         </p>
     </div>
 </div>
@@ -29,9 +32,9 @@
             <span class="close_modal">x</span>
             <h1 id="currency_name"></h1>
         </div>
-        <div id="modal_ballance">
-            <h2>Acc Ballance: </h2>
-            <h3 id="ballance_text"></h3>
+        <div id="modal_balance">
+            <h2>Acc Balance: </h2>
+            <h3 id="balance_text"></h3>
         </div>
         <div>
             <h2>Recieve Funds</h2>
@@ -47,10 +50,11 @@
             <h2>Transfer Funds</h2>
         </div>
         <div class="modal_forms">
-            <form action="/action_page.php" target="_blank">
+            <!--            <form action="" target="_blank">-->
+            <div>
                 <p>
-                    <input id="address_input" type="text" placeholder="Address Reciever" required
-                           name="Address Reciever"/>
+                    <input id="address_input" type="text" placeholder="Address Receiver" required
+                           name="Address Receiver"/>
                 </p>
                 <p>
                     <input id="amount_input" type="number" step="0.00001" placeholder="Amount" required name="Amount"/>
@@ -58,7 +62,8 @@
                 <p>
                     <button id="submit" type="submit">SEND</button>
                 </p>
-            </form>
+            </div>
+            <!--            </form>-->
         </div>
     </div>
 </div>

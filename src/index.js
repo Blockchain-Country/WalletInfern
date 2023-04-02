@@ -1,24 +1,37 @@
 const WalletUI = require("./core/ui/WalletUI");
 const BlockchainService = require("./core/blockchain/BlockchainService");
 
+const CURRENCY = "ETH";
+
 class Application {
+
   constructor() {
+    this.setCurrency(CURRENCY)
     this.walletUI = new WalletUI(this);
-    this.blockchainService = new BlockchainService();
+    this.blockchainService = new BlockchainService(this);
   }
 
-  preperUI() {
-    this.walletUI.preperUI();
+  changeCurrency(_currencyName){
+    this.setCurrency(_currencyName);
+    this.prepareUI();
+  }
+
+  prepareUI() {
+    this.walletUI.prepareUI();
+  }
+
+  setCurrency(_currencyName) {
+    this.currencyName = _currencyName;
   }
 
   getCurrency() {
-    return "Choose currency!";
+    return this.currencyName;
   }
 
-  getBallance() {
+  getBalance() {
     return new Promise(async (resolve, reject) => {
       try {
-        let balance = await this.blockchainService.getBallance();
+        let balance = await this.blockchainService.getBalance();
         return resolve(balance);
       } catch (e) {
         return reject(e);
@@ -50,4 +63,4 @@ class Application {
 }
 
 let app = new Application();
-app.preperUI();
+app.prepareUI();
