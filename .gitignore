@@ -1,4 +1,4 @@
 node_modules
-secrets/Secret.js
 .idea
 .env
+./dist/main.js

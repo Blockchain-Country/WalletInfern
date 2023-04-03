@@ -7,23 +7,32 @@ class ListenerSetter {
         this.setSendListener();
         this.setDisplayModalListener();
         this.setCloseModalListener();
-        // this.setOpenModalListener();
     }
 
     setSendListener() {
-        document.getElementById("submit").addEventListener("click", (event) => {
-            const to = document.getElementById("address_input").value;
-            const amount = document.getElementById("amount_input").value;
+        let address_input = document.getElementById("address_input");
+        let amount_input = document.getElementById("amount_input");
+        let submitBtn = document.getElementById("submit");
+        submitBtn.addEventListener("click", (event) => {
+            const to = address_input.value;
+            const amount = amount_input.value;
+            submitBtn.disabled = true;
             this.app.sendFunds(to, amount).then((result) => {
                 alert(result);
+                submitBtn.disabled = false; // Enable submit button after event is completed
+                amount_input.value = null;
+                address_input.value = null;
+            }).catch((error) => {
+                alert(error);
+                submitBtn.disabled = false; // Enable submit button on error
             });
         });
     }
 
     setDisplayModalListener() {
         let currencyName = "";
-        const buttons = document.getElementsByClassName("w3_button");
-        const modal = document.getElementsByClassName("modal")[0]; // get the first element in the collection
+        let buttons = document.getElementsByClassName("w3_button");
+        let modal = document.querySelector(".modal");
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener("click", (event) => {
                 // let currencyNameText = event.target.textContent;
@@ -37,26 +46,23 @@ class ListenerSetter {
     }
 
     setCloseModalListener(event) {
-        let elements = document.getElementsByClassName("close_modal");
-        const modal = document.getElementsByClassName("modal")[0];
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].addEventListener("click", () => {
+        let modal = document.querySelector('.modal');
+        let closeModal = document.querySelector('.close_modal');
+        let address_input = document.getElementById("address_input");
+        let amount_input = document.getElementById("amount_input");
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+            amount_input.value = null;
+            address_input.value = null;
+        });
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
                 modal.style.display = "none";
-                document.getElementById("address_input").value = "";
-                document.getElementById("amount_input").value = "";
-            });
-        }
+                amount_input.value = null;
+                address_input.value = null;
+            }
+        })
     }
-
-    // setOpenModalListener() {
-    //   const buttons = document.getElementsByClassName("w3_button");
-    //   const modal = document.getElementsByClassName("modal")[0]; // get the first element in the collection
-    //   for (let i = 0; i < buttons.length; i++) {
-    //     buttons[i].addEventListener("click", () => {
-    //       modal.style.display = "block";
-    //     });
-    //   }
-    // }
 }
 
 module.exports = ListenerSetter;

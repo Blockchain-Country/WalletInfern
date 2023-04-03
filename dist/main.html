@@ -12,7 +12,7 @@
 
 <body>
 <div>
-    <div>
+    <div class="currency_container">
         <p>
             <button class="w3_button" id="ETH">ETH</button>
         </p>
@@ -26,9 +26,9 @@
 </div>
 
 <!-- Menu Modal -->
-<div class="modal">
+<dialog class="modal">
     <div class="modal_content">
-        <div>
+        <div class="modal_section">
             <span class="close_modal">x</span>
             <h1 id="currency_name"></h1>
         </div>
@@ -36,20 +36,20 @@
             <h2>Acc Balance: </h2>
             <h3 id="balance_text"></h3>
         </div>
-        <div>
+        <div class="modal_section">
             <h2>Recieve Funds</h2>
         </div>
         <div id="modal_address">
             <h2>Address:</h2>
             <h3 id="address_text"></h3>
-            <h5>
+            <p>
                 <smart-qrcode id="qr_address"></smart-qrcode>
-            </h5>
+            </p>
         </div>
-        <div>
+        <div class="modal_section">
             <h2>Transfer Funds</h2>
         </div>
-        <div class="modal_forms">
+        <form class="modal_form" method="dialog">
             <!--            <form action="" target="_blank">-->
             <div>
                 <p>
@@ -64,9 +64,9 @@
                 </p>
             </div>
             <!--            </form>-->
-        </div>
+        </form>
     </div>
-</div>
+</dialog>
 <script src="./main.js"></script>
 </body>
 
