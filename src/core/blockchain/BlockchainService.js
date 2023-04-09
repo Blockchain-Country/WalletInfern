@@ -7,7 +7,7 @@ class BlockchainService {
         this.app = app;
         let eth = new EthLib();
         let eth20 = new Eth20Lib();
-        let btc = new BtcLib();
+        let btc = new BtcLib(app);
         this.libraries = {
             "ETH": eth,
             "ETH20": eth20,
