@@ -7,7 +7,6 @@ class Renderer {
     this.renderCurrency();
     this.renderBalance();
     this.renderAddress();
-    this.renderQrCode();
   }
 
   renderCurrency() {
@@ -17,22 +16,19 @@ class Renderer {
 
   renderBalance() {
     let element = document.getElementById("balance_text");
-    this.app.getBalance().then((balance) => {
+    console.log("Renderer renderBalance before")
+    this.app.getCurrentBalance().then((balance) => {
+      console.log("Renderer renderBalance:", balance )
       element.innerHTML = `${balance.toFixed(4)} ${this.app.getCurrency()}`;
     });
   }
 
   renderAddress() {
-    let element = document.getElementById("address_text");
+    let addressTextElement = document.getElementById("address_text");
+    let qrElement = document.getElementById("qr_address");
     this.app.getAddress().then((address) => {
-      element.innerHTML = address;
-    });
-  }
-
-  renderQrCode() {
-    let element = document.getElementById("qr_address");
-    this.app.getAddress().then((address) => {
-      element.value = address;
+      addressTextElement.innerHTML = address;
+      qrElement.value = address;
     });
   }
 }

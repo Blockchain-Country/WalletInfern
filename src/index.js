@@ -30,15 +30,15 @@ class Application {
     return this.currencyName;
   }
 
-  getBalance() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let balance = await this.blockchainService.getBalance();
+  getCurrentBalance(){
+    return new Promise(async(resolve,reject)=>{
+      try{
+        let balance =await this.blockchainService.getCurrentBalance();
         return resolve(balance);
-      } catch (e) {
+      }catch (e){
         return reject(e);
       }
-    });
+    })
   }
 
   getAddress() {
@@ -62,7 +62,30 @@ class Application {
       }
     });
   }
+
+  generateMnemonic(){
+    return new Promise(async(resolve,reject)=>{
+      try{
+        let result =await this.blockchainService.generateMnemonic();
+        return resolve(result);
+      }catch (e){
+        return reject(e);
+      }
+    })
+  }
+
+  importMnemonic(mnemonic){
+    return new Promise(async(resolve,reject)=>{
+      try{
+        let result =await this.blockchainService.importMnemonic(mnemonic);
+        app.prepareUI();
+        return resolve(result);
+      }catch (e){
+        return reject(e);
+      }
+    })
+  }
 }
 
 let app = new Application();
-app.prepareUI();
+// app.prepareUI();
