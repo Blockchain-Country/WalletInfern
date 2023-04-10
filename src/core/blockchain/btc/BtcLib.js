@@ -5,7 +5,7 @@ const BlockCypherProvider = require('/src/core/blockchain/btc/BlockCypherProvide
 const {ECPair,TransactionBuilder,networks} = require('bitcoinjs-lib');
 const BTCNETWORK = networks.testnet;
 
-const BTC_ADDRESS = process.env.BTC_ADDRESS;
+// const BTC_ADDRESS = process.env.BTC_ADDRESS;
 const BTC_WIF = process.env.BTC_WIF;
 
 class BtcLib extends AbstractCurrencyLab{
@@ -14,25 +14,14 @@ class BtcLib extends AbstractCurrencyLab{
         let validator = new BtcValidator();
         let converter = new BtcConverter();
         let provider = new BlockCypherProvider(app, validator, converter);
-        super(provider,validator,converter);
+        super(app, provider,validator,converter);
     }
-
-    getAddress(){
-        return new Promise(async(resolve,reject)=>{
-            try{
-                console.log("btcLib getAddress",BTC_ADDRESS);
-                return resolve(BTC_ADDRESS);
-            }catch(e){
-                return reject(e);
-            }
-        })
-    };
 
     getBalance(address){
         return new Promise(async(resolve,reject)=>{
             try{
-                this.validator.validateAddress(BTC_ADDRESS);
-                let balance = await this.provider.getBalance(BTC_ADDRESS);
+                this.validator.validateAddress(address);
+                let balance = await this.provider.getBalance(address);
                 balance = this.converter.toDecimals(balance);
                 console.log("getBalance balance toDecimals = ",balance);
                 return resolve(balance);
@@ -79,7 +68,6 @@ class BtcLib extends AbstractCurrencyLab{
             }
         })
     }
-
 
     _formatTransactionParameters(to,amount){
         return new Promise(async(resolve,reject)=>{

@@ -4,8 +4,8 @@ const Eth20Converter = require("../../helpers/Eth20Converter");
 const Validator = require("../../validators/blockchain/EthValidator");
 const AbstractCurrencyLib = require("/src/core/blockchain/AbstractCurrencyLib");
 
-const ETH20_ADDRESS = process.env.ETH20_ADDRESS;
-const ETH20_PRIVATE_KEY = process.env.ETH20_PRIVATE_KEY;
+// const ETH20_ADDRESS = process.env.ETH20_ADDRESS;
+// const ETH20_PRIVATE_KEY = process.env.ETH20_PRIVATE_KEY;
 const ETH20_PROVIDER_URL = process.env.ETH20_PROVIDER_URL;
 
 let GWEI = 10 ** 9;
@@ -13,40 +13,22 @@ let GAS_PRICE = 70 * GWEI;
 let GAS_LIMIT = 21000;
 
 class Eth20Lib extends AbstractCurrencyLib {
-    constructor() {
+    constructor(app) {
         let web3 = new Web3(new Web3.providers.HttpProvider(ETH20_PROVIDER_URL));
         let converter = new Eth20Converter();
         let validator = new Validator();
-        super(web3, validator, converter);
+        super(app, web3, validator, converter);
     }
 
-    getAddress() {
+    getBalance(address) {
         return new Promise(async (resolve, reject) => {
             try {
-                this.validator.validateAddress(ETH20_ADDRESS)
-                return resolve(ETH20_ADDRESS);
-            } catch (e) {
-                return reject(e);
-            }
-        });
-    }
-
-    getPrivateKey() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                return resolve(ETH20_PRIVATE_KEY);
-            } catch (e) {
-                return reject(e);
-            }
-        });
-    }
-
-    getBalance() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                // let _address = await this.getAddress();
-                let balanceWei = await this.provider.eth.getBalance(ETH20_ADDRESS);
+                console.log("EthLib getBalance address: ", address)
+                this.validator.validateAddress(address);
+                let balanceWei = await this.provider.eth.getBalance(address);
+                console.log("EthLib getBalance before after")
                 let balanceEth = await this.toDecimal(balanceWei);
+                console.log("EthLib getBalance before after balance ", balanceEth)
                 return resolve(balanceEth);
             } catch (e) {
                 return reject(e);
@@ -71,22 +53,37 @@ class Eth20Lib extends AbstractCurrencyLib {
     _formatTransactionParams(to, amount, data = "") {
         return new Promise(async (resolve, reject) => {
             try {
-                let privateKey = await this.getPrivateKey();
-                // if (typeof ETH20_PRIVATE_KEY !== "string") {
-                //     ETH20_PRIVATE_KEY = ETH20_PRIVATE_KEY.toString("hex");
-                // }
-                let privateKeyBuffer = Buffer.from(privateKey, "hex");
-                let from = await this.getAddress();
-                let nonce = await this.getNextNonce();
-                let gasPrice = this.getGasPrice();
-                let gasLimit = this.getGasLimit();
+                this.validator.validateAddress(to);
+
+                this.validator.validateNumber(amount);
                 let value = this.fromDecimal(amount);
+                let valueHex = this.provider.utils.numberToHex(value);
+                this.validator.validateNumber(valueHex);
+
+                this.validator.validateString(data);
+                let privateKey = await this.getPrivateKey();
+                this.validator.validateString(privateKey);
+                let privateKeyBuffer = Buffer.from(privateKey, "hex");
+
+                let from = await this.getAddress();
+                this.validator.validateAddress(from);
+
+                let nonce = await this.getNextNonce();
+                this.validator.validateNumber(nonce);
+
+                let gasPrice = this.getGasPrice();
+                this.validator.validateNumber(gasPrice);
+                let gasPriceHex = this.provider.utils.numberToHex(gasPrice)
+                this.validator.validateNumber(gasPriceHex);
+
+                let gasLimit = this.getGasLimit();
+                this.validator.validateNumber(gasLimit);
                 let txParams = {
                     from: from,
                     to: to,
                     privateKey: privateKeyBuffer,
-                    value: this.provider.utils.numberToHex(value),
-                    gasPrice: this.provider.utils.numberToHex(gasPrice),
+                    value: valueHex,
+                    gasPrice: gasPriceHex,
                     gasLimit: gasLimit,
                     nonce: nonce,
                     data: data,
@@ -125,7 +122,8 @@ class Eth20Lib extends AbstractCurrencyLib {
     getNextNonce(to, value, data) {
         return new Promise(async (resolve, reject) => {
             try {
-                let nonce = await this.provider.eth.getTransactionCount(ETH20_ADDRESS);
+                let address = await this.app.getAddress();
+                let nonce = await this.provider.eth.getTransactionCount(address);
                 return resolve(nonce);
             } catch (e) {
                 return reject(e);

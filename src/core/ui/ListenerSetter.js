@@ -7,6 +7,7 @@ class ListenerSetter {
         this.setSendListener();
         this.setDisplayModalListener();
         this.setCloseModalListener();
+        this.setMnemonicListeners();
     }
 
     setSendListener() {
@@ -61,6 +62,27 @@ class ListenerSetter {
                 amount_input.value = null;
                 address_input.value = null;
             }
+        })
+    }
+
+    setMnemonicListeners(){
+        this.setGenerateMnemonicListener();
+        this.setImportMnemonicOnInputListener();
+    }
+
+    setGenerateMnemonicListener(){
+        document.getElementById("generate-mnemonic").addEventListener("click",async()=>{
+            let mnemonic = await this.app.generateMnemonic();
+            alert(mnemonic);
+        })
+    }
+
+    setImportMnemonicOnInputListener(){
+        document.getElementById("import-mnemonic").addEventListener("input",async()=>{
+            let element = event.target || event.srcElement;
+            let mnemonic = element.value;
+            console.log(mnemonic);
+            this.app.importMnemonic(mnemonic);
         })
     }
 }
