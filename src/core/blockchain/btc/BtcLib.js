@@ -6,7 +6,7 @@ const {ECPair,TransactionBuilder,networks} = require('bitcoinjs-lib');
 const BTCNETWORK = networks.testnet;
 
 // const BTC_ADDRESS = process.env.BTC_ADDRESS;
-const BTC_WIF = process.env.BTC_WIF;
+// const BTC_WIF = process.env.BTC_WIF;
 
 class BtcLib extends AbstractCurrencyLab{
 
@@ -52,7 +52,8 @@ class BtcLib extends AbstractCurrencyLab{
         return new Promise(async(resolve,reject)=>{
             try {
                 console.log("btc lib createSignRawTx");
-                let keyring = await ECPair.fromWIF(BTC_WIF,BTCNETWORK);
+                let wif = await this.getPrivateKey();
+                let keyring = await ECPair.fromWIF(wif, BTCNETWORK);
                 console.log("keyring",keyring);
                 console.log("btcLib txb")
                 let txb = new TransactionBuilder(BTCNETWORK);
