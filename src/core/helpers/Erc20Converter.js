@@ -1,7 +1,7 @@
 const Converter = require("./Converter")
 const DECIMALS = 18;
 
-class Eth20Converter extends Converter {
+class Erc20Converter extends Converter {
 
     toDecimals(amount) {
         return super.toDecimals(amount, DECIMALS);
@@ -12,4 +12,4 @@ class Eth20Converter extends Converter {
     }
 }
 
-module.exports = Eth20Converter
+module.exports = Erc20Converter

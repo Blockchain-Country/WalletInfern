@@ -1,21 +1,21 @@
 const Web3 = require("web3");
 const Transaction = require("ethereumjs-tx");
-const Eth20Converter = require("../../helpers/Eth20Converter");
+const Erc20Converter = require("../../helpers/Erc20Converter");
 const Validator = require("../../validators/blockchain/EthValidator");
 const AbstractCurrencyLib = require("/src/core/blockchain/AbstractCurrencyLib");
 
 // const ETH20_ADDRESS = process.env.ETH20_ADDRESS;
 // const ETH20_PRIVATE_KEY = process.env.ETH20_PRIVATE_KEY;
-const ETH20_PROVIDER_URL = process.env.ETH20_PROVIDER_URL;
+const ERC20_PROVIDER_URL = process.env.ERC20_PROVIDER_URL;
 
 let GWEI = 10 ** 9;
 let GAS_PRICE = 70 * GWEI;
 let GAS_LIMIT = 21000;
 
-class Eth20Lib extends AbstractCurrencyLib {
+class Erc20Lib extends AbstractCurrencyLib {
     constructor(app) {
-        let web3 = new Web3(new Web3.providers.HttpProvider(ETH20_PROVIDER_URL));
-        let converter = new Eth20Converter();
+        let web3 = new Web3(new Web3.providers.HttpProvider(ERC20_PROVIDER_URL));
+        let converter = new Erc20Converter();
         let validator = new Validator();
         super(app, web3, validator, converter);
     }
@@ -23,12 +23,12 @@ class Eth20Lib extends AbstractCurrencyLib {
     getBalance(address) {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log("EthLib getBalance address: ", address)
+                console.log("Erc20Lib getBalance address: ", address)
                 this.validator.validateAddress(address);
                 let balanceWei = await this.provider.eth.getBalance(address);
-                console.log("EthLib getBalance before after")
+                console.log("Erc20Lib getBalance before after")
                 let balanceEth = await this.toDecimal(balanceWei);
-                console.log("EthLib getBalance before after balance ", balanceEth)
+                console.log("Erc20Lib getBalance before after balance ", balanceEth)
                 return resolve(balanceEth);
             } catch (e) {
                 return reject(e);
@@ -40,7 +40,7 @@ class Eth20Lib extends AbstractCurrencyLib {
         return new Promise(async (resolve, reject) => {
             try {
                 this.validator.validateNumber(amount, "sendFunds() amount");
-                this.validator.validateAddress(to, "sendFunds() ETH20_ADDRESS to");
+                this.validator.validateAddress(to, "sendFunds() Erc20_ADDRESS to");
                 let txData = await this._formatTransactionParams(to, amount);
                 let hash = await this._sendTransaction(txData);
                 return resolve(hash);
@@ -150,4 +150,4 @@ class Eth20Lib extends AbstractCurrencyLib {
     }
 }
 
-module.exports = Eth20Lib;
+module.exports = Erc20Lib;

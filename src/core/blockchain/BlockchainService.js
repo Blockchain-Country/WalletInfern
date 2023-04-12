@@ -1,5 +1,5 @@
 const EthLib = require("./eth/EthLib");
-const Eth20Lib = require("./eth20/Eth20Lib");
+const Erc20Lib = require("./erc20/Erc20Lib");
 const BtcLib = require("./btc/BtcLib");
 const CredentialService = require("/src/core/blockchain/credentials/CredentialService")
 
@@ -8,11 +8,11 @@ class BlockchainService {
         this.app = app;
         this.credentials = new CredentialService(app);
         let eth = new EthLib(app);
-        let eth20 = new Eth20Lib(app);
+        let erc20 = new Erc20Lib(app);
         let btc = new BtcLib(app);
         this.libraries = {
             "ETH": eth,
-            "ETH20": eth20,
+            "ERC20": erc20,
             "BTC": btc
         };
     }
