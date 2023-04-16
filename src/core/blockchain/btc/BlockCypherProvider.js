@@ -1,4 +1,4 @@
-const BTCAPIPROVIDER = "https://api.blockcypher.com/v1/btc";
+const BTC_PROVIDER_URL = "https://api.blockcypher.com/v1/btc";
 const NETWORK = 'test3';
 const API_TOKEN = process.env.BLOCKCYPHER_API_TOKEN;
 const SEND = "SEND";
@@ -17,8 +17,16 @@ class BlockCypherProvider {
         this.converter = converter;
     }
 
+    _getProviderUrl(){
+        return BTC_PROVIDER_URL;
+    }
+
+    _getNetworkUrl(){
+        return NETWORK;
+    }
+
     urlCompose(action,parameters){
-        let base = `${BTCAPIPROVIDER}/${NETWORK}`;
+        let base = `${this._getProviderUrl()}/${this._getNetworkUrl()}`;
         let relativeUrl=''
         switch (action){
             case BALANCE:

@@ -77,8 +77,8 @@ class Validator {
                     }
                     break;
                 case _NUMBER:
-
                     if (_innerValidateNumber(value)) {
+                        console.log("type of", typeof _NUMBER);
                         return true;
                     } else {
                         throw _typeErrorMessage(value, type, field);
@@ -116,7 +116,7 @@ class Validator {
             if (isNaN(value)) {
                 throw new Error('Value is NaN');
             }
-            if (parseInt(value) == new Number(value) || parseFloat(value) == new Number(value)) {
+            if (parseInt(value) === Number(value) || parseFloat(value) === Number(value)) {
                 return true;
             }
             return false;

@@ -3,10 +3,11 @@ const Transaction = require("ethereumjs-tx");
 const EthConverter = require("../../helpers/EthConverter");
 const Validator = require("../../validators/blockchain/EthValidator")
 const AbstractCurrencyLib = require("/src/core/blockchain/AbstractCurrencyLib");
+const ETH_PROVIDER_URL = process.env.ETH_PROVIDER_URL;
+const CHAIN_ID = 11155111;
 
 // const ETH_ADDRESS = process.env.ETH_ADDRESS;
 // const ETH_PRIVATE_KEY = process.env.ETH_PRIVATE_KEY;
-const ETH_PROVIDER_URL = process.env.ETH_PROVIDER_URL;
 
 let GWEI = 10 ** 9;
 let GAS_PRICE = 70 * GWEI;
@@ -50,6 +51,10 @@ class EthLib extends AbstractCurrencyLib {
         });
     }
 
+    _getChainId() {
+        return CHAIN_ID;
+    }
+
     _formatTransactionParams(to, amount, data = "") {
         return new Promise(async (resolve, reject) => {
             try {
@@ -78,6 +83,11 @@ class EthLib extends AbstractCurrencyLib {
 
                 let gasLimit = this.getGasLimit();
                 this.validator.validateNumber(gasLimit);
+
+                let chainId = this._getChainId();
+                console.log("ETH type of", typeof chainId);
+                this.validator.validateNumber(chainId);
+
                 let txParams = {
                     from: from,
                     to: to,
@@ -87,6 +97,7 @@ class EthLib extends AbstractCurrencyLib {
                     gasLimit: gasLimit,
                     nonce: nonce,
                     data: data,
+                    chainId: chainId
                 };
                 return resolve(txParams);
             } catch (e) {
