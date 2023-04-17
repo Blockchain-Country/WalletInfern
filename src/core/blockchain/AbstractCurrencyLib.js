@@ -20,7 +20,6 @@ class AbstractCurrencyLib {
         return new Promise(async (resolve, reject) => {
             try {
                 let address = await this.getCredentials().getAddress();
-                console.log("AbstractCurrencyLib getAddress", address)
                 return resolve(address);
             } catch (e) {
                 return reject(e);
@@ -32,7 +31,6 @@ class AbstractCurrencyLib {
         return new Promise(async (resolve, reject) => {
             try {
                 let privKey = await this.getCredentials().getPrivateKey();
-                console.log("AbstractCurrencyLib privKey", privKey)
                 return resolve(privKey);
             } catch (e) {
                 return reject(e);
@@ -43,11 +41,8 @@ class AbstractCurrencyLib {
     getCurrentBalance() {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log("Abstract getCurrentBalance start");
                 let address = await this.getAddress();
-                console.log("Abstract getCurrentBalance middle", address);
                 let balance = await this.getBalance(address);
-                console.log("Abstract getCurrentBalance end", balance);
                 return resolve(balance);
             } catch (e) {
                 return reject(e);

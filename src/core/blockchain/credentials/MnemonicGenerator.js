@@ -1,7 +1,7 @@
 const bip39 = require('bip39');
 
 class MnemonicGenerator {
-    generateMnemonic(){
+    generateMnemonic() {
         return bip39.generateMnemonic();
     }
 }

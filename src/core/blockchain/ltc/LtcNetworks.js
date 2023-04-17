@@ -1,6 +1,6 @@
 module.exports = {
-    "main" : {
-        bech32:"ltc1",
+    "main": {
+        bech32: "ltc1",
         messagePrefix: '\x19Litecoin Signed Message:\n',
         bip32: {
             public: 0x0488b21e,

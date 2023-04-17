@@ -3,8 +3,7 @@ const BnbValidator = require('/src/core/validators/blockchain/BnbValidator')
 const BnbConverter = require('/src/core/helpers/BnbConverter');
 const Web3 = require("web3");
 const BNB_PROVIDER_URL = process.env.BNB_PROVIDER_URL;
-const CHAIN_ID = 97;
-
+const CHAIN_ID_TEST = 97;
 
 class BnbLib extends EthLib {
     constructor(app) {
@@ -15,7 +14,7 @@ class BnbLib extends EthLib {
     }
 
     _getChainId() {
-        return CHAIN_ID;
+        return CHAIN_ID_TEST;
     }
 }
 

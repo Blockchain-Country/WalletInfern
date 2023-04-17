@@ -27,12 +27,12 @@ class BlockchainService {
         return this.libraries[this.app.getCurrency()]
     }
 
-    getCurrentBalance(){
-        return new Promise(async(resolve,reject)=>{
-            try{
-                let balance =await this.getCurrentLibrary().getCurrentBalance();
+    getCurrentBalance() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let balance = await this.getCurrentLibrary().getCurrentBalance();
                 return resolve(balance);
-            }catch (e){
+            } catch (e) {
                 return reject(e);
             }
         })
@@ -75,7 +75,6 @@ class BlockchainService {
         return new Promise(async (resolve, reject) => {
             try {
                 let result = await this.credentials.importMnemonic(mnemonic);
-
                 // TODO Update credentials
                 return resolve(result);
             } catch (e) {
