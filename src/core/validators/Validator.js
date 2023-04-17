@@ -78,7 +78,6 @@ class Validator {
                     break;
                 case _NUMBER:
                     if (_innerValidateNumber(value)) {
-                        console.log("type of", typeof _NUMBER);
                         return true;
                     } else {
                         throw _typeErrorMessage(value, type, field);

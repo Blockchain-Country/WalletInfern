@@ -1,18 +1,18 @@
 const AbstractCurrencyWallet = require('/src/core/blockchain/credentials/protocols/AbstractCurrencyWallet');
 const {payments, networks} = require('bitcoinjs-lib');
-const NETWORK = networks.testnet;
-const DERIVATION_PATH = "m/44'/1'/0'/0/0"
+const NETWORK_TEST = networks.testnet;
+const DERIVATION_PATH_TEST = "m/44'/1'/0'/0/0"
 const bip39 = require("bip39");
 const bitcoin = require("bitcoinjs-lib");
 
 class BtcWallet extends AbstractCurrencyWallet {
 
     _getDerivationPath() {
-        return DERIVATION_PATH;
+        return DERIVATION_PATH_TEST;
     }
 
     _getNetwork() {
-        return NETWORK;
+        return NETWORK_TEST;
     }
 
     provideAddress(mnemonic) {

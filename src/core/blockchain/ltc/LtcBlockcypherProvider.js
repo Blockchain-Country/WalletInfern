@@ -1,15 +1,15 @@
-const BtcBlockcypherProvider = require('/src/core/blockchain/btc/BlockcypherProvider');
-//const PROVIDER_URL=process.env.LTC_PROVIDER_URL;
-const LTC_PROVIDER_URL="https://api.blockcypher.com/v1/ltc";
-const NETWORK = 'main';
+const BtcBlockCypherProvider = require('/src/core/blockchain/btc/BlockCypherProvider');
+const LTC_PROVIDER_URL_MAIN = "https://api.blockcypher.com/v1/ltc";
+const NETWORK_MAIN = 'main';
 
-class LtcBlockcypherProvider extends BtcBlockcypherProvider{
-    _getProviderUrl(){
-        return LTC_PROVIDER_URL;
+class LtcBlockCypherProvider extends BtcBlockCypherProvider {
+    _getProviderUrl() {
+        return LTC_PROVIDER_URL_MAIN;
     }
-    _getNetworkUrl(){
-        return NETWORK;
+
+    _getNetworkUrl() {
+        return NETWORK_MAIN;
     }
 }
 
-module.exports = LtcBlockcypherProvider;
+module.exports = LtcBlockCypherProvider;

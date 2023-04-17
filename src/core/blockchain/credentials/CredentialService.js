@@ -5,9 +5,6 @@ const BtcWallet = require('/src/core/blockchain/credentials/protocols/BtcWallet'
 const LtcWallet = require('/src/core/blockchain/credentials/protocols/LtcWallet');
 const BnbWallet = require('/src/core/blockchain/credentials/protocols/BnbWallet');
 const Validator = require("/src/core/validators/Validator");
-const BTC = "BTC";
-const ETH = "ETH";
-const ERC20 = "ERC20";
 
 class CredentialsService {
     constructor(app) {

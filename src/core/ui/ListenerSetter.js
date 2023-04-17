@@ -36,11 +36,8 @@ class ListenerSetter {
         let modal = document.querySelector(".modal");
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener("click", (event) => {
-                // let currencyNameText = event.target.textContent;
                 currencyName = event.target.id;
                 this.app.changeCurrency(currencyName)
-                // let element = document.getElementById("currency_name");
-                // element.innerHTML = currencyNameText;
                 modal.style.display = "block";
             });
         }
@@ -65,23 +62,22 @@ class ListenerSetter {
         })
     }
 
-    setMnemonicListeners(){
+    setMnemonicListeners() {
         this.setGenerateMnemonicListener();
         this.setImportMnemonicOnInputListener();
     }
 
-    setGenerateMnemonicListener(){
-        document.getElementById("generate-mnemonic").addEventListener("click",async()=>{
+    setGenerateMnemonicListener() {
+        document.getElementById("generate-mnemonic").addEventListener("click", async () => {
             let mnemonic = await this.app.generateMnemonic();
             alert(mnemonic);
         })
     }
 
-    setImportMnemonicOnInputListener(){
-        document.getElementById("import-mnemonic").addEventListener("input",async()=>{
+    setImportMnemonicOnInputListener() {
+        document.getElementById("import-mnemonic").addEventListener("input", async () => {
             let element = event.target || event.srcElement;
             let mnemonic = element.value;
-            console.log(mnemonic);
             this.app.importMnemonic(mnemonic);
         })
     }
