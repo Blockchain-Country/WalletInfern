@@ -2,12 +2,12 @@ const WalletUI = require("./core/ui/WalletUI");
 const BlockchainService = require("./core/blockchain/BlockchainService");
 const HttpService = require('/src/core/services/HttpService');
 
-const CURRENCY = "ETH";
+const CURRENCY = "Enter Mnemonic!";
 
 class Application {
 
     constructor() {
-        this.setCurrency(CURRENCY)
+        // this.setCurrency(CURRENCY)
         this.httpService = new HttpService(this);
         this.walletUI = new WalletUI(this);
         this.blockchainService = new BlockchainService(this);
