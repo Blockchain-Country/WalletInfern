@@ -79,7 +79,7 @@ class Application {
         return new Promise(async (resolve, reject) => {
             try {
                 let result = await this.blockchainService.importMnemonic(mnemonic);
-                this.prepareUI();
+                app.prepareUI();
                 return resolve(result);
             } catch (e) {
                 console.error("Error in index.js importMnemonic():", e);
