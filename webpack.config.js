@@ -3,7 +3,7 @@ var webpack = require("webpack");
 const path = require("path");
 const Dotenv = require('dotenv-webpack');
 
-const isProduction = process.env.NODE_ENV === "development";
+const isProduction = process.env.NODE_ENV === "production";
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const stylesHandler = "style-loader";
