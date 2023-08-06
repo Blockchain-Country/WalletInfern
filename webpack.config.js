@@ -3,7 +3,7 @@ var webpack = require("webpack");
 const path = require("path");
 const Dotenv = require('dotenv-webpack');
 
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === "development";
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const stylesHandler = "style-loader";
@@ -15,9 +15,9 @@ const config = {
     // filename: "bundle.js",
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: "./dist/index.html",
-    // }),
+    new HtmlWebpackPlugin({
+      template: "./dist/main.html",
+    }),
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
     }),
