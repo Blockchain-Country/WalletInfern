@@ -16,7 +16,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./dist/index.html",
+      template: "./dist/main.html",
     }),
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
