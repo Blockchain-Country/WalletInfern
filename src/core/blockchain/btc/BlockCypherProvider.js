@@ -214,4 +214,4 @@ class BlockCypherProvider {
     }
 }
 
-module.exports = BlockCypherProvider;
+module.exports = BlockcypherProvider;

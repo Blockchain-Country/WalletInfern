@@ -11,4 +11,4 @@ class LtcBlockCypherProvider extends BtcBlockCypherProvider {
         return NETWORK_MAIN;
     }
 }
-module.exports = LtcBlockCypherProvider;
+module.exports = LtcBlockcypherProvider;
