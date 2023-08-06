@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="module" src="../node_modules/smart-webcomponents/source/modules/smart.qrcode.js"></script>
+    <!-- 2<script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script> -->
+    <link rel="stylesheet" href="./styles/style.css"/>
+<script defer src="main.js"></script></head>
+
+<body>
+
+<nav class="nav_bar">
+    <div>
+        <span style="flex: auto; align-items: flex-end; color:black; margin: 20px;">
+            <button style="border: 2px solid deeppink; width: 10%" id="generate-mnemonic">GENERATE</button>
+            <label for="import-mnemonic"></label>
+            <input style="width: 50%;" id="import-mnemonic" name="import-mnemonic" type="password">
+                   placeholder="Import your mnemonic">
+        </span>
+    </div>
+</nav>
+<div>
+    <div class="currency_container">
+        <p>
+            <button class="w3_button" id="ETH">ETH</button>
+        </p>
+        <p>
+            <button class="w3_button" id="ERC20">ERC20</button>
+        </p>
+        <p>
+            <button class="w3_button" id="BTC">BTC</button>
+        </p>
+        <p>
+            <button class="w3_button" id="LTC">LTC</button>
+        </p>
+        <p>
+            <button class="w3_button" id="BNB">BNB</button>
+        </p>
+    </div>
+</div>
+
+<!-- Menu Modal -->
+<dialog class="modal">
+    <div class="modal_content">
+        <div class="modal_section">
+            <span class="close_modal">x</span>
+            <h1 id="currency_name"></h1>
+        </div>
+        <div id="modal_balance">
+            <h2>Acc Balance: </h2>
+            <h3 id="balance_text"></h3>
+        </div>
+        <div class="modal_section">
+            <h2>Receive Funds</h2>
+        </div>
+        <div id="modal_address">
+            <h2>Address:</h2>
+            <h3 id="address_text"></h3>
+            <p>
+                <smart-qrcode id="qr_address"></smart-qrcode>
+            </p>
+        </div>
+        <div class="modal_section">
+            <h2>Transfer Funds</h2>
+        </div>
+        <form class="modal_form" method="dialog">
+            <!--            <form action="" target="_blank">-->
+            <div>
+                <p>
+                    <input id="address_input" type="text" placeholder="Address Receiver" required
+                           name="Address Receiver"/>
+                </p>
+                <p>
+                    <input id="amount_input" type="number" step="0.00001" placeholder="Amount" required name="Amount"/>
+                </p>
+                <p>
+                    <button id="submit" type="submit">SEND</button>
+                </p>
+            </div>
+            <!--            </form>-->
+        </form>
+    </div>
+</dialog>
+<script src="./main.js"></script>
+</body>
+
+</html>
