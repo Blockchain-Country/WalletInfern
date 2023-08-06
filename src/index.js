@@ -2,12 +2,12 @@ const WalletUI = require("./core/ui/WalletUI");
 const BlockchainService = require("./core/blockchain/BlockchainService");
 const HttpService = require('/src/core/services/HttpService');
 
-const CURRENCY = "Enter Mnemonic!";
+const MNEMONIC_PROMPT = "Enter Mnemonic!";
 
 class Application {
 
     constructor() {
-        // this.setCurrency(CURRENCY)
+        // this.setCurrency(MNEMONIC_PROMPT)
         this.httpService = new HttpService(this);
         this.walletUI = new WalletUI(this);
         this.blockchainService = new BlockchainService(this);
@@ -36,6 +36,7 @@ class Application {
                 let balance = await this.blockchainService.getCurrentBalance();
                 return resolve(balance);
             } catch (e) {
+                console.error("Error in index.js getCurrentBalance():", e);
                 return reject(e);
             }
         })
@@ -78,9 +79,10 @@ class Application {
         return new Promise(async (resolve, reject) => {
             try {
                 let result = await this.blockchainService.importMnemonic(mnemonic);
-                app.prepareUI();
+                this.prepareUI();
                 return resolve(result);
             } catch (e) {
+                console.error("Error in index.js importMnemonic():", e);
                 return reject(e);
             }
         })
