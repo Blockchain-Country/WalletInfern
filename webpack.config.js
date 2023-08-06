@@ -15,9 +15,9 @@ const config = {
     // filename: "bundle.js",
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "dist/index.html",
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: "./dist/index.html",
+    // }),
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
     }),
