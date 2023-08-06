@@ -1,5 +1,5 @@
 const BtcLib = require('/src/core/blockchain/btc/BtcLib');
-const LtcBlockCypherProvider = require('/src/core/blockchain/ltc/LtcBlockcypherProvider');
+const LtcBlockCypherProvider = require('./LtcBlockcypherProvider');
 const LtcValidator = require('/src/core/validators/blockchain/LtcValidator')
 const LtcConverter = require('/src/core/helpers/LtcConverter');
 const LTC_NETWORK_MAIN = require('/src/core/blockchain/ltc/LtcNetworks')["main"];

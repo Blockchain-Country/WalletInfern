@@ -9,7 +9,7 @@ const PROBLEM_WITH_NODE = "PROBLEM_WITH_NODE";
 const WRONG_FEE = "WRONG FEE";
 const TXSIZE = 0.512;
 
-class BlockCypherProvider {
+class BlockcypherProvider {
     constructor(app, validator, converter) {
         this.httpService = app.httpService;
         this.validator = validator;

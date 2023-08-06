@@ -1,7 +1,7 @@
 const BtcConverter = require('/src/core/helpers/BtcConverter');
 const BtcValidator = require('/src/core/validators/blockchain/BtcValidator');
 const AbstractCurrencyLib = require('/src/core/blockchain/AbstractCurrencyLib')
-const BlockCypherProvider = require('/src/core/blockchain/btc/BlockcypherProvider');
+const BlockCypherProvider = require('./BlockcypherProvider');
 const {ECPair, TransactionBuilder, networks} = require('bitcoinjs-lib');
 const BTC_NETWORK_TEST = networks.testnet;
 
