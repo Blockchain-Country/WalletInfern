@@ -4,3 +4,4 @@ node_modules
 .env.production
 dist/main.js
 .DS_Store
+dist/index.html
